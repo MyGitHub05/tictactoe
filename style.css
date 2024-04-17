@@ -21,7 +21,7 @@
   border: 1px solid blue;
   min-height: 600px;
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .cell {

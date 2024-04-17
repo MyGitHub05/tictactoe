@@ -68,7 +68,7 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
     board.printBoard();
   };
   const playRound = (column) => {
-    board.dropMove(column, getActivePlayer().token);
+    board.playerMove(column, getActivePlayer().token);
     switchActivePlayer();
     printNewRound();
   };
@@ -81,10 +81,10 @@ function ScreenController() {
   const game = GameController();
   const message = document.querySelector(".message");
   const boardDiv = document.querySelector(".board");
-  const fullGame = document.querySelector(".game");
 
   const updateScreen = () => {
-    fullGame.textContent = "";
+    message.textContent = "";
+    boardDiv.textContent = "";
     const board = game.getBoard();
     const activePlayer = game.getActivePlayer();
     message.textContent = `${activePlayer.name}'s turn`;
