@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.game {
+  border: 1px solid;
+  min-height: 700px;
+  max-width: 700px;
+  margin: auto;
+  align-items: center;
+}
+.message {
+  border: 1px solid red;
+  margin: auto;
+  font-size: 50px;
+  text-align: center;
+  font-weight: bolder;
+}
+.board {
+  border: 1px solid blue;
+  min-height: 600px;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+}
+
+.cell {
+  border: 1px solid green;
+  cursor: pointer;
+}
