@@ -12,13 +12,13 @@ function GameBoard() {
 
   const getBoard = () => board;
 
-  const playerMove = (column, player) => {
+  const playerMove = (column, row, player) => {
     const availableCells = board
       .filter((row) => row[column].getValue() === " ")
       .map((row) => row[column]);
 
     if (!availableCells) return;
-    availableCells[column] = player;
+    board[row][column].dropMove(player);
 
     return availableCells;
   };
@@ -67,8 +67,8 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
   const printNewRound = () => {
     board.printBoard();
   };
-  const playRound = (column) => {
-    board.playerMove(column, getActivePlayer().token);
+  const playRound = (column, row) => {
+    board.playerMove(column, row, getActivePlayer().token);
     switchActivePlayer();
     printNewRound();
   };
@@ -89,11 +89,12 @@ function ScreenController() {
     const activePlayer = game.getActivePlayer();
     message.textContent = `${activePlayer.name}'s turn`;
 
-    board.forEach((row) => {
+    board.forEach((row, rowIndex) => {
       row.forEach((cell, index) => {
         const cellButton = document.createElement("button");
         cellButton.classList.add("cell");
         cellButton.dataset.column = index;
+        cellButton.dataset.row = rowIndex;
         cellButton.textContent = cell.getValue();
         boardDiv.appendChild(cellButton);
       });
@@ -101,10 +102,11 @@ function ScreenController() {
   };
 
   function ClickHandleBoard(e) {
+    const selectedrow = e.target.dataset.row;
     const selectedColumn = e.target.dataset.column;
 
-    if (!selectedColumn) return;
-    game.playRound(selectedColumn);
+    if (!selectedColumn && selectedrow) return;
+    game.playRound(selectedColumn, selectedrow);
     updateScreen();
   }
 
