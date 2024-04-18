@@ -48,7 +48,7 @@ function Cell() {
 function GameController(playerOne = "player 1", playerTwo = "player 2") {
   const board = GameBoard();
 
-  const Player = [
+  const Players = [
     {
       name: playerOne,
       token: "X",
@@ -59,9 +59,11 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
     },
   ];
 
-  const activePlayer = Player[0];
+  let activePlayer = Players[0];
   const switchActivePlayer = () =>
-    activePlayer === Player[0] ? Player[1] : Player[0];
+    (activePlayer = activePlayer === Players[0] ? Players[1] : Players[0]);
+
+  console.log(activePlayer);
 
   const getActivePlayer = () => activePlayer;
   const printNewRound = () => {

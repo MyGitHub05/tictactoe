@@ -27,4 +27,5 @@
 .cell {
   border: 1px solid green;
   cursor: pointer;
+  font-size: 100px;
 }
