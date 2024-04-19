@@ -1,67 +1,99 @@
+@font-face {
+  font-family: "hand drawn";
+  src: url(font/drip-october-font/DripOctober-vm0JA.ttf);
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: white;
+  font-family: "hand drawn";
+}
+body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  background-color: black;
 }
 .game {
-  border: 1px solid;
-  min-height: 700px;
-  max-width: 700px;
-  margin: auto;
+  border: 1px solid white;
   align-items: center;
+  padding: 10px;
 }
 .message {
-  border: 1px solid red;
-  margin: auto;
+  color: white;
+  padding: 20px;
   font-size: 50px;
   text-align: center;
   font-weight: bolder;
   margin-bottom: 30px;
 }
 .board {
-  border-width: 10px;
-  border-style: solid;
-  /* border-image: linear-gradient(
-      to right,
-      rgba(34, 193, 195, 1),
-      rgba(188, 189, 90, 1),
-      rgba(200, 188, 82, 1),
-      rgba(228, 202, 41, 1),
-      rgba(215, 188, 72, 1),
-      rgba(253, 187, 45, 1)
-    )
-    1; */
-  border-image: linear-gradient(
-      90deg,
-      rgba(255, 235, 0, 1) 0%,
-      rgba(0, 78, 111, 1) 26%,
-      rgba(0, 212, 255, 1) 65%,
-      rgba(0, 8, 36, 1)
-    )
-    1;
-  min-height: 600px;
+  height: 300px;
+  width: 300px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 5px;
+  gap: 20px;
 }
 
 .cell {
-  border: 1px solid green;
+  color: white;
+  border: 5px solid rgb(210, 34, 230);
   cursor: pointer;
-  font-size: 100px;
-  background-color: white;
+  font-size: 50px;
+  border-radius: 10px;
+  background-color: black;
+  transition: 0.1s ease-in-out;
+}
+.cell:hover {
+  box-shadow: 1px 1px 32px 10px rgba(212, 0, 255, 0.75);
+  -webkit-box-shadow: 1px 1px 32px 10px rgba(212, 0, 255, 0.75);
+  -moz-box-shadow: 1px 1px 32px 10px rgba(212, 0, 255, 0.75);
+}
+
+.controlBtn {
+  padding: 10px;
+  border: 1px solid yellow;
+  min-height: 700px;
+  max-width: 700px;
+  align-content: center;
+  align-items: center;
 }
 
 .resetBtn,
 .startBtn {
+  margin-left: 20px;
+  margin-bottom: 20px;
   height: 50px;
-  width: 100px;
+  width: 180px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 20px;
   font-weight: bold;
-  border: none;
-  background-color: green;
+  border: 5px solid green;
+  background-color: black;
   color: aliceblue;
   cursor: pointer;
+  transition: 0.1s ease;
+}
+.resetBtn:hover,
+.startBtn:hover {
+  height: 55px;
+  width: 185px;
+}
+
+.playerScore {
+  border: 5px solid red;
+  height: 290px;
+  width: 250px;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  align-items: center;
+  border-radius: 10px;
+}
+.score {
+  font-size: 150px;
+  margin-left: 70px;
+  margin-top: 30px;
 }

@@ -179,7 +179,6 @@ function ScreenController() {
   resetBtn.addEventListener("click", resetGame);
   startBtn.addEventListener("click", updateScreen);
 
-  //updateScreen();
   startingScreen();
 }
 
