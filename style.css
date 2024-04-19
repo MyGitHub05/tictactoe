@@ -16,16 +16,52 @@
   font-size: 50px;
   text-align: center;
   font-weight: bolder;
+  margin-bottom: 30px;
 }
 .board {
-  border: 1px solid blue;
+  border-width: 10px;
+  border-style: solid;
+  /* border-image: linear-gradient(
+      to right,
+      rgba(34, 193, 195, 1),
+      rgba(188, 189, 90, 1),
+      rgba(200, 188, 82, 1),
+      rgba(228, 202, 41, 1),
+      rgba(215, 188, 72, 1),
+      rgba(253, 187, 45, 1)
+    )
+    1; */
+  border-image: linear-gradient(
+      90deg,
+      rgba(255, 235, 0, 1) 0%,
+      rgba(0, 78, 111, 1) 26%,
+      rgba(0, 212, 255, 1) 65%,
+      rgba(0, 8, 36, 1)
+    )
+    1;
   min-height: 600px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
 }
 
 .cell {
   border: 1px solid green;
   cursor: pointer;
   font-size: 100px;
+  background-color: white;
+}
+
+.resetBtn,
+.startBtn {
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+  background-color: green;
+  color: aliceblue;
+  cursor: pointer;
 }
