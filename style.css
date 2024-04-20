@@ -26,6 +26,8 @@ body {
   text-align: center;
   font-weight: bolder;
   margin-bottom: 30px;
+  height: 100px;
+  width: 1000px;
 }
 .board {
   height: 300px;
@@ -78,8 +80,7 @@ body {
 }
 .resetBtn:hover,
 .startBtn:hover {
-  height: 55px;
-  width: 185px;
+  transform: scale(1.05);
 }
 
 .playerScore {

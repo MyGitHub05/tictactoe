@@ -63,6 +63,14 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
   const printNewRound = () => {
     board.printBoard();
   };
+  const checkEmptyCells = (board) => {
+    return board.some((row) => {
+      return row.some((cell) => {
+        return cell.getValue() === "";
+      });
+    });
+  };
+
   const checkWinningCombination = (board, player) => {
     const winningConditions = [
       //rows
@@ -92,9 +100,9 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
   };
   const playRound = (column, row) => {
     board.playerMove(column, row, getActivePlayer().token);
-    if (checkWinningCombination(board.getBoard(), getActivePlayer().token)) {
-      return;
-    }
+    checkWinningCombination(board.getBoard(), getActivePlayer().token);
+    checkEmptyCells(board.getBoard());
+
     switchActivePlayer();
     printNewRound();
   };
@@ -104,6 +112,7 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
     playRound,
     getBoard: board.getBoard,
     checkWinningCombination,
+    checkEmptyCells,
   };
 }
 
@@ -141,9 +150,14 @@ function ScreenController() {
       game.getBoard(),
       game.getActivePlayer().token
     );
-    message.textContent = winner
-      ? `${activePlayer.name} Win`
-      : `${activePlayer.name}'s turn`;
+    const tieGame = game.checkEmptyCells(game.getBoard());
+    if (!tieGame) {
+      message.textContent = "TIE GAME!";
+    } else {
+      message.textContent = winner
+        ? `${activePlayer.name} Win`
+        : `${activePlayer.name}'s turn`;
+    }
 
     board.forEach((row, rowIndex) => {
       row.forEach((cell, index) => {
