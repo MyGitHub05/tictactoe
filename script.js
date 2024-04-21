@@ -48,12 +48,16 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
     {
       name: playerOne,
       token: "X",
+      score: 0,
     },
     {
       name: playerTwo,
       token: "O",
+      score: 0,
     },
   ];
+
+  const getPlayers = () => Players;
 
   let activePlayer = Players[0];
   const switchActivePlayer = () =>
@@ -100,8 +104,12 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
   };
   const playRound = (column, row) => {
     board.playerMove(column, row, getActivePlayer().token);
-    checkWinningCombination(board.getBoard(), getActivePlayer().token);
-    checkEmptyCells(board.getBoard());
+    if (checkWinningCombination(board.getBoard(), getActivePlayer().token)) {
+      getActivePlayer().score++;
+      return;
+    }
+
+    //checkEmptyCells(board.getBoard());
 
     switchActivePlayer();
     printNewRound();
@@ -113,6 +121,7 @@ function GameController(playerOne = "player 1", playerTwo = "player 2") {
     getBoard: board.getBoard,
     checkWinningCombination,
     checkEmptyCells,
+    getPlayers,
   };
 }
 
@@ -122,6 +131,8 @@ function ScreenController() {
   const boardDiv = document.querySelector(".board");
   const resetBtn = document.querySelector(".resetBtn");
   const startBtn = document.querySelector(".startBtn");
+  const p1score = document.getElementById("playerOneScore");
+  const p2score = document.getElementById("playerTwoScore");
 
   const startingScreen = () => {
     boardDiv.textContent = "";
@@ -151,13 +162,6 @@ function ScreenController() {
       game.getActivePlayer().token
     );
     const tieGame = game.checkEmptyCells(game.getBoard());
-    if (!tieGame) {
-      message.textContent = "TIE GAME!";
-    } else {
-      message.textContent = winner
-        ? `${activePlayer.name} Win`
-        : `${activePlayer.name}'s turn`;
-    }
 
     board.forEach((row, rowIndex) => {
       row.forEach((cell, index) => {
@@ -171,6 +175,21 @@ function ScreenController() {
     });
 
     boardDiv.addEventListener("click", ClickHandleBoard);
+
+    if (winner) {
+      message.textContent = `${activePlayer.name} Win!!`;
+      boardDiv.removeEventListener("click", ClickHandleBoard);
+      if (activePlayer.name === game.getPlayers()[0].name) {
+        p1score.textContent = activePlayer.score;
+      } else if (activePlayer.name === game.getPlayers()[1].name) {
+        p2score.textContent = activePlayer.score;
+      }
+    } else if (!tieGame) {
+      message.textContent = "TIE GAME!";
+      boardDiv.removeEventListener("click", ClickHandleBoard);
+    } else {
+      message.textContent = `${activePlayer.name}'s turn`;
+    }
   };
 
   function resetGame() {
