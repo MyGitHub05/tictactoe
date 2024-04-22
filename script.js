@@ -133,6 +133,8 @@ function ScreenController() {
   const startBtn = document.querySelector(".startBtn");
   const p1score = document.getElementById("playerOneScore");
   const p2score = document.getElementById("playerTwoScore");
+  let scoreP1 = game.getPlayers()[0].score;
+  let scoreP2 = game.getPlayers()[1].score;
 
   const startingScreen = () => {
     boardDiv.textContent = "";
@@ -180,9 +182,11 @@ function ScreenController() {
       message.textContent = `${activePlayer.name} Win!!`;
       boardDiv.removeEventListener("click", ClickHandleBoard);
       if (activePlayer.name === game.getPlayers()[0].name) {
-        p1score.textContent = activePlayer.score;
+        scoreP1++;
+        p1score.textContent = scoreP1;
       } else if (activePlayer.name === game.getPlayers()[1].name) {
-        p2score.textContent = activePlayer.score;
+        scoreP2++;
+        p2score.textContent = scoreP2;
       }
     } else if (!tieGame) {
       message.textContent = "TIE GAME!";
